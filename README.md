@@ -58,22 +58,48 @@ Untuk menyimpan data sungguhan, pilih salah satu:
 
 ## Deploy ke GitHub Pages
 
-1. Buat repository baru di GitHub, misalnya `wedding-sisy-rizky`.
-2. Upload `index.html` dan folder `assets/` ke repository tersebut
-   (lewat web GitHub: "Add file" → "Upload files", atau lewat terminal):
+1. Buat repository baru di GitHub, misalnya `wedding-rizky-sisy`.
+2. Upload `index.html`, `README.md`, `music.mp3`, `rizky.jpg`, `sisy.jpg`,
+   dan foto galeri ke repository tersebut — semuanya sejajar di root, tidak
+   di dalam folder (lewat web GitHub: "Add file" → "Upload files", atau
+   lewat terminal):
    ```
    git init
    git add .
-   git commit -m "Undangan pernikahan Sisy & Rizky"
+   git commit -m "Undangan pernikahan Rizky & Sisy"
    git branch -M main
-   git remote add origin https://github.com/USERNAME/wedding-sisy-rizky.git
+   git remote add origin https://github.com/USERNAME/wedding-rizky-sisy.git
    git push -u origin main
    ```
 3. Di repository GitHub, buka **Settings → Pages**.
 4. Pada **Source**, pilih branch `main` dan folder `/ (root)`, lalu **Save**.
 5. Tunggu 1–2 menit, situs akan aktif di:
    ```
-   https://USERNAME.github.io/wedding-sisy-rizky/
+   https://USERNAME.github.io/wedding-rizky-sisy/
    ```
 
 Selesai — tinggal bagikan link tersebut (bisa ditambah `?to=Nama` untuk tiap tamu).
+
+## Menambahkan foto galeri (kamu isi sendiri)
+
+Foto galeri **belum diisi** — bagian ini sengaja dikosongkan supaya kamu bisa
+tambahkan sendiri sesuka hati. Caranya:
+
+1. Upload foto-foto kenangan ke root repo GitHub (sejajar dengan `index.html`,
+   `rizky.jpg`, `sisy.jpg`, `music.mp3`) — beri nama sederhana, misalnya
+   `foto1.jpg`, `foto2.jpg`, `foto3.jpg`, dst.
+2. Buka `index.html`, cari komentar **"GALERI — di sini tempat kamu tambah
+   foto sendiri"** di bagian `<div class="gallery-grid">`.
+3. Ganti setiap baris `<div class="g-item"><svg>...</svg></div>` menjadi:
+   ```html
+   <div class="g-item"><img src="foto1.jpg"></div>
+   ```
+   Ulangi untuk tiap foto (foto2.jpg, foto3.jpg, dst). Boleh menambah atau
+   mengurangi jumlah kotak sesuai jumlah foto yang kamu punya.
+
+## Foto mempelai
+
+Foto Rizky (`rizky.jpg`) dan Sisy (`sisy.jpg`) sudah terpasang di bagian
+"Kedua Mempelai" — tinggal upload kedua file itu ke root repo dengan nama
+persis `rizky.jpg` dan `sisy.jpg`.
+
