@@ -3,22 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Our Story</title>
+<title>Our Story — Rizky & Sisy</title>
 <meta name="description" content="Private couple website — our memories, our story.">
 <meta name="robots" content="noindex, nofollow">
+
+<!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+
+<!-- Font Awesome 6 (free icons) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="locked">
 
 <!-- ============ GATE ============ -->
 <div id="gate">
-  <div class="gate-heart">💜</div>
-  <h1>Our Story</h1>
+  <div class="gate-icon"><i class="fas fa-heart"></i></div>
+  <h1>Our Story <span>·</span> Rizky &amp; Sisy</h1>
   <p id="gate-hint">Password yang cuma kita berdua tahu</p>
-  <input type="password" id="gate-input" placeholder="Password" autocomplete="off">
-  <button class="enter-btn" id="gate-enter">Masuk</button>
+  <input type="password" id="gate-input" placeholder="Ketik password..." autocomplete="off">
+  <button class="enter-btn" id="gate-enter"><i class="fas fa-unlock-alt"></i>&nbsp; Masuk</button>
   <div class="gate-error" id="gate-error"></div>
 </div>
 
@@ -27,7 +33,7 @@
   <!-- ============ NAVBAR ============ -->
   <nav id="navbar">
     <div class="container nav-inner">
-      <div class="nav-logo">Our Story</div>
+      <div class="nav-logo"><i class="fas fa-heart" style="color:var(--pink);"></i> Our Story</div>
       <ul class="nav-links">
         <li><a href="#hero">Home</a></li>
         <li><a href="#story">Our Story</a></li>
@@ -37,7 +43,7 @@
         <li><a href="#dates">Special Days</a></li>
       </ul>
       <div class="nav-actions">
-        <button class="icon-btn theme-toggle" title="Ganti tema">🌙</button>
+        <button class="icon-btn theme-toggle" title="Ganti tema"><i class="fas fa-moon"></i></button>
         <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
       </div>
     </div>
@@ -45,7 +51,7 @@
 
   <!-- mobile menu -->
   <div class="mobile-menu" id="mobile-menu">
-    <div class="close-menu" id="close-menu">✕</div>
+    <div class="close-menu" id="close-menu"><i class="fas fa-times"></i></div>
     <a href="#hero">Home</a>
     <a href="#story">Our Story</a>
     <a href="#memories">Memories</a>
@@ -59,7 +65,7 @@
     <div class="hero-glow"></div>
     <div class="hero-particles" id="hero-particles"></div>
     <div class="hero-content">
-      <div class="eyebrow">Our Story</div>
+      <div class="eyebrow"><i class="fas fa-heart" style="margin-right:6px;"></i> Our Story</div>
       <h1 class="hero-names" id="hero-names"></h1>
       <p class="hero-tagline" id="hero-tagline"></p>
 
@@ -72,16 +78,16 @@
         <div class="unit" id="c-secs"><span class="num">0</span><span class="lbl">Secs</span></div>
       </div>
 
-      <a href="#memories" class="cta-btn">Our Memories</a>
+      <a href="#memories" class="cta-btn"><i class="fas fa-camera-retro"></i> Our Memories</a>
     </div>
-    <div class="scroll-hint">Scroll<div class="line"></div></div>
+    <div class="scroll-hint"><i class="fas fa-chevron-down" style="font-size:14px;"></i><div class="line"></div></div>
   </header>
 
   <!-- ============ GALLERY ============ -->
   <section class="section" id="gallery">
     <div class="container">
       <div class="section-head reveal">
-        <div class="eyebrow">Foto Kami</div>
+        <div class="eyebrow"><i class="fas fa-images" style="margin-right:6px;"></i> Foto Kami</div>
         <h2 class="section-heading">Gallery</h2>
         <p class="section-sub">Kumpulan momen yang ingin kami simpan selamanya.</p>
       </div>
@@ -93,7 +99,7 @@
   <section class="section" id="story">
     <div class="container">
       <div class="section-head reveal">
-        <div class="eyebrow">Our Story</div>
+        <div class="eyebrow"><i class="fas fa-book-open" style="margin-right:6px;"></i> Our Story</div>
         <h2 class="section-heading">Perjalanan Kami</h2>
         <p class="section-sub">Dari pertemuan pertama, sampai hari ini.</p>
       </div>
@@ -105,7 +111,7 @@
   <section class="section" id="letter-section">
     <div class="container">
       <div class="section-head reveal">
-        <div class="eyebrow">Love Letter</div>
+        <div class="eyebrow"><i class="fas fa-envelope" style="margin-right:6px;"></i> Love Letter</div>
         <h2 class="section-heading">Sepucuk Surat</h2>
         <p class="section-sub">Klik amplopnya untuk membuka.</p>
       </div>
@@ -113,11 +119,11 @@
         <div>
           <div class="envelope" id="envelope">
             <div class="envelope-body">
-              <div class="envelope-seal">❤</div>
+              <div class="envelope-seal"><i class="fas fa-heart"></i></div>
             </div>
             <div class="envelope-flap"></div>
           </div>
-          <div class="envelope-hint">Tap untuk membuka</div>
+          <div class="envelope-hint"><i class="fas fa-hand-pointer"></i> Tap untuk membuka</div>
         </div>
       </div>
     </div>
@@ -127,7 +133,7 @@
   <section class="section" id="memories">
     <div class="container">
       <div class="section-head reveal">
-        <div class="eyebrow">Our Memories</div>
+        <div class="eyebrow"><i class="fas fa-archive" style="margin-right:6px;"></i> Our Memories</div>
         <h2 class="section-heading">Kenangan Kami</h2>
         <p class="section-sub">Setiap momen kecil yang jadi berarti.</p>
       </div>
@@ -140,7 +146,7 @@
   <section class="section" id="dates">
     <div class="container">
       <div class="section-head reveal">
-        <div class="eyebrow">Special Dates</div>
+        <div class="eyebrow"><i class="fas fa-calendar-alt" style="margin-right:6px;"></i> Special Dates</div>
         <h2 class="section-heading">Tanggal Penting</h2>
         <p class="section-sub">Momen-momen yang selalu kami tunggu.</p>
       </div>
@@ -152,21 +158,21 @@
   <section class="section" id="secret-section">
     <div class="container">
       <div class="section-head reveal">
-        <div class="eyebrow">Just For You</div>
+        <div class="eyebrow"><i class="fas fa-lock" style="margin-right:6px;"></i> Just For You</div>
         <h2 class="section-heading">Ada Satu Rahasia</h2>
         <p class="section-sub">Sesuatu yang cuma boleh kamu baca.</p>
       </div>
-      <button class="secret-btn reveal" id="secret-open-btn"><span id="secret-btn-label">OPEN SECRET</span></button>
+      <button class="secret-btn reveal" id="secret-open-btn"><i class="fas fa-unlock"></i> <span id="secret-btn-label">OPEN SECRET</span></button>
     </div>
   </section>
 
   <footer>
-    <p>Made with <span class="f-heart">♥</span> — a private story, just for two.</p>
+    <p>Made with <span class="f-heart"><i class="fas fa-heart"></i></span> — a private story, just for two.</p>
   </footer>
 
   <!-- ============ MUSIC PLAYER ============ -->
   <div id="music-player">
-    <button class="music-play-btn" id="music-play-btn">▶</button>
+    <button class="music-play-btn" id="music-play-btn"><i class="fas fa-play"></i></button>
     <div class="music-info">
       <div class="music-title" id="music-title">Song title</div>
       <div class="music-artist" id="music-artist">Artist</div>
@@ -177,13 +183,13 @@
   </div>
 
   <!-- ============ ADMIN TOGGLE ============ -->
-  <button id="admin-toggle" title="Cara edit konten">✎</button>
+  <button id="admin-toggle" title="Cara edit konten"><i class="fas fa-pencil-alt"></i></button>
 
 </div><!-- /#site -->
 
 <!-- ============ LIGHTBOX ============ -->
 <div id="lightbox">
-  <div class="lb-close">✕</div>
+  <div class="lb-close"><i class="fas fa-times"></i></div>
   <div id="lightbox-content"></div>
   <div class="lb-caption" id="lightbox-caption"></div>
 </div>
@@ -191,7 +197,7 @@
 <!-- ============ LETTER MODAL ============ -->
 <div id="letter-modal">
   <div class="letter-paper">
-    <div class="letter-close">✕</div>
+    <div class="letter-close"><i class="fas fa-times"></i></div>
     <h3 id="letter-heading">For You</h3>
     <div class="body-text" id="letter-body"></div>
     <div class="sign" id="letter-sign"></div>
@@ -201,8 +207,8 @@
 <!-- ============ SECRET MODAL ============ -->
 <div id="secret-modal">
   <div class="secret-box">
-    <div class="secret-close">✕</div>
-    <div class="lock-icon" id="lock-icon">🔒</div>
+    <div class="secret-close"><i class="fas fa-times"></i></div>
+    <div class="lock-icon" id="lock-icon"><i class="fas fa-lock"></i></div>
     <h3>Pesan Rahasia</h3>
     <div class="secret-text" id="secret-text"></div>
   </div>
@@ -211,8 +217,8 @@
 <!-- ============ ADMIN PANEL (cara edit) ============ -->
 <div id="admin-panel">
   <div class="admin-sheet">
-    <span class="admin-close">✕</span>
-    <h3>✎ Cara Mengedit Website Ini</h3>
+    <span class="admin-close"><i class="fas fa-times"></i></span>
+    <h3><i class="fas fa-pencil-alt" style="margin-right:8px;"></i> Cara Mengedit Website Ini</h3>
     <p class="hint">
       Semua konten website ini (nama, tanggal, foto, cerita, love letter, musik,
       pesan rahasia, dan password) diatur dari <strong>satu file</strong>:
