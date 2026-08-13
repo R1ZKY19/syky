@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Sisy Syafira & Rizky Prayogi — The Wedding</title>
-<meta name="description" content="Undangan pernikahan Sisy Syafira & Rizky Prayogi">
+<title>Rizky Prayogi & Sisy Syafira — The Wedding</title>
+<meta name="description" content="Undangan pernikahan Rizky Prayogi & Sisy Syafira">
 
 <!-- ============================================================
      CARA EDIT CEPAT — cari komentar "GANTI" di seluruh file ini
@@ -77,6 +77,11 @@
     background-repeat:repeat-x;
     background-size:34px 34px;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34' viewBox='0 0 34 34'%3E%3Cpath d='M17 4c7 0 11 5 11 11 0 5-3 8-7 9-2 .6-3 2-1.5 3.6 2 2 5 1.4 6.5-.4' fill='none' stroke='%23D4AF37' stroke-width='1.3' opacity='.9'/%3E%3Ccircle cx='17' cy='15' r='1.6' fill='%23F4900C'/%3E%3C/svg%3E");
+    animation:paisleyDrift 14s linear infinite;
+  }
+  @keyframes paisleyDrift{
+    from{ background-position-x:0; }
+    to{ background-position-x:340px; }
   }
 
   .lotus{
@@ -84,8 +89,8 @@
     filter:drop-shadow(0 2px 4px rgba(0,0,0,.15));
   }
 
-  section{position:relative;padding:80px 20px;}
-  .section-inner{max-width:900px;margin:0 auto;text-align:center;}
+  section{position:relative;padding:80px 20px;overflow:hidden;}
+  .section-inner{max-width:900px;margin:0 auto;text-align:center;position:relative;z-index:1;}
 
   .section-title{
     font-family:var(--font-display);
@@ -140,6 +145,14 @@
   }
   .heart.spark-star::before,
   .heart.spark-star::after{content:none;}
+
+  /* marigold petal particle */
+  .heart.petal{
+    border-radius:0 60% 0 60%;
+    background:radial-gradient(circle at 35% 35%, #FFD37A, var(--marigold) 70%) !important;
+  }
+  .heart.petal::before,
+  .heart.petal::after{content:none;}
   .heart::before,
   .heart::after{
     content:"";
@@ -209,7 +222,18 @@
     border-radius:50%;
     animation:spin 30s linear infinite;
   }
-  #cover .ring svg{width:64px;height:64px;}
+  #cover .ring::after{
+    content:"";position:absolute;inset:-34px;
+    border-radius:50%;
+    background:repeating-conic-gradient(from 0deg,
+      rgba(200,17,85,.16) 0deg 10deg,
+      rgba(212,175,55,.16) 10deg 20deg,
+      rgba(244,144,12,.16) 20deg 30deg,
+      transparent 30deg 40deg);
+    animation:spin 40s linear infinite reverse;
+    z-index:-1;
+  }
+  #cover .ring svg{width:64px;height:64px;animation:flicker 2.4s ease-in-out infinite;}
 
   #cover .to-label{
     font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;
@@ -270,6 +294,12 @@
     background-repeat:repeat-x;background-size:40px 60px;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='60' viewBox='0 0 40 60'%3E%3Cpath d='M0 0 Q 20 30 40 0' fill='none' stroke='%23D4AF37' stroke-width='1.5'/%3E%3Ccircle cx='20' cy='22' r='7' fill='%23F4900C'/%3E%3Ccircle cx='0' cy='2' r='4' fill='%23F4900C'/%3E%3Ccircle cx='40' cy='2' r='4' fill='%23F4900C'/%3E%3C/svg%3E");
     opacity:.9;
+    transform-origin:top center;
+    animation:garlandSway 4.5s ease-in-out infinite;
+  }
+  @keyframes garlandSway{
+    0%,100%{ transform:scaleY(1) translateY(0); }
+    50%{ transform:scaleY(1.06) translateY(3px); }
   }
   .hero .eyebrow{color:var(--gold);}
   .hero h1{
@@ -326,6 +356,55 @@
     animation:spin 90s linear infinite;
     pointer-events:none;
   }
+
+  /* colourful rotating rangoli, used as section accent */
+  .rangoli{
+    position:absolute;
+    width:420px;height:420px;
+    border-radius:50%;
+    top:50%;left:50%;transform:translate(-50%,-50%);
+    background:
+      repeating-conic-gradient(from 0deg,
+        rgba(200,17,85,.10) 0deg 10deg,
+        rgba(212,175,55,.10) 10deg 20deg,
+        rgba(244,144,12,.10) 20deg 30deg,
+        transparent 30deg 40deg);
+    animation:spin 70s linear infinite;
+    pointer-events:none;
+    z-index:0;
+  }
+  .rangoli.reverse{animation-direction:reverse;width:280px;height:280px;}
+
+  /* flickering diya flame */
+  .flame{
+    display:inline-block;
+    animation:flicker 1.6s ease-in-out infinite;
+    transform-origin:50% 90%;
+  }
+  @keyframes flicker{
+    0%,100%{ transform:scale(1) rotate(0deg); filter:brightness(1); }
+    25%{ transform:scale(1.05) rotate(-2deg); filter:brightness(1.15); }
+    50%{ transform:scale(.97) rotate(1deg); filter:brightness(.95); }
+    75%{ transform:scale(1.04) rotate(2deg); filter:brightness(1.1); }
+  }
+
+  /* bindi dot row */
+  .bindi-row{
+    display:flex;justify-content:center;gap:14px;
+    margin:0 auto;padding:6px 0;
+    position:relative;z-index:1;
+  }
+  .bindi-row span{
+    width:6px;height:6px;border-radius:50%;
+    background:var(--marigold);
+    animation:bindiPulse 2.2s ease-in-out infinite;
+  }
+  .bindi-row span:nth-child(2n){background:var(--magenta);animation-delay:.3s;}
+  .bindi-row span:nth-child(3n){background:var(--gold);animation-delay:.6s;}
+  @keyframes bindiPulse{
+    0%,100%{ opacity:.4; transform:scale(.8); }
+    50%{ opacity:1; transform:scale(1.2); }
+  }
   .hero .sub{
     font-weight:300;font-size:.95rem;letter-spacing:.05em;color:var(--gold-pale);
     margin-top:6px;
@@ -372,6 +451,7 @@
   .couple-grid{
     display:grid;grid-template-columns:1fr auto 1fr;gap:36px;
     align-items:center;margin-top:50px;
+    position:relative;z-index:1;
   }
   .couple-card{
     display:flex;flex-direction:column;align-items:center;text-align:center;
@@ -427,6 +507,7 @@
   .timer{
     display:flex;justify-content:center;gap:16px;flex-wrap:wrap;
     margin-top:40px;
+    position:relative;z-index:1;
   }
   .timer .box{
     background:rgba(255,255,255,.06);
@@ -455,6 +536,7 @@
   .events{background:var(--ivory);}
   .event-grid{
     display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:44px;
+    position:relative;z-index:1;
   }
   .event-card{
     background:var(--ivory);
@@ -497,7 +579,7 @@
      ============================================================ */
   .story{background:var(--cream);}
   .story-line{
-    max-width:640px;margin:50px auto 0;position:relative;
+    max-width:640px;margin:50px auto 0;position:relative;z-index:1;
     padding-left:30px;text-align:left;
   }
   .story-line::before{
@@ -520,6 +602,7 @@
   .gallery{background:var(--ivory);}
   .gallery-grid{
     display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:44px;
+    position:relative;z-index:1;
   }
   .gallery-grid .g-item{
     aspect-ratio:1/1;border-radius:14px;overflow:hidden;
@@ -587,6 +670,7 @@
     background:var(--ivory);border:1px solid var(--gold-light);
     border-radius:18px;padding:30px;
     box-shadow:0 16px 34px rgba(122,14,39,.08);
+    position:relative;z-index:1;
   }
   .gift-card .bank{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--marigold);font-weight:600;}
   .gift-card .acc{font-family:var(--font-display);font-size:1.6rem;color:var(--maroon);margin:8px 0;letter-spacing:.05em;}
@@ -613,7 +697,11 @@
   .reveal.in{opacity:1;transform:translateY(0);}
 
   @media (prefers-reduced-motion: reduce){
-    .heart, #music-toggle, .story-line::before, .scroll-cue span.line{animation:none !important;}
+    .heart, #music-toggle, .story-line::before, .scroll-cue span.line,
+    .rangoli, .flame, .bindi-row span, .paisley-row, .hero .garland,
+    .hero .mandala-glow, #cover .ring::after, #cover .ring svg, #open-btn{
+      animation:none !important;
+    }
     .reveal{transition:none;opacity:1;transform:none;}
   }
 
@@ -663,9 +751,9 @@
   <div class="guest-name" id="guest-name">Tamu Undangan</div>
   <div class="eyebrow">The Wedding Of</div>
   <div class="names">
-    Sisy Syafira
-    <span class="amp">&</span>
     Rizky Prayogi
+    <span class="amp">&</span>
+    Sisy Syafira
   </div>
   <button id="open-btn">✦ Buka Undangan</button>
 </div>
@@ -687,9 +775,9 @@
     <div class="spark" style="top:85%;left:45%;width:11px;height:11px;animation-delay:1.5s;"></div>
     <div class="eyebrow reveal">Undangan Pernikahan</div>
     <h1 class="reveal">
-      <span class="shimmer">Sisy Syafira</span>
-      <span class="amp">&</span>
       <span class="shimmer">Rizky Prayogi</span>
+      <span class="amp">&</span>
+      <span class="shimmer">Sisy Syafira</span>
     </h1>
     <div class="sub reveal">Dua hati, satu janji, dirangkai dalam warna dan cerita India</div>
     <!-- GANTI tanggal & lokasi ringkas di bawah -->
@@ -698,6 +786,7 @@
   </section>
 
   <!-- QUOTE -->
+  <div class="paisley-row"></div>
   <section class="quote">
     <div class="section-inner reveal">
       <div class="eyebrow" style="color:var(--marigold)">Untaian Doa</div>
@@ -711,26 +800,18 @@
 
   <!-- COUPLE -->
   <section class="couple">
+    <div class="rangoli"></div>
+    <div class="rangoli reverse"></div>
     <div class="corner tl"></div><div class="corner tr"></div>
     <div class="section-inner reveal">
       <div class="eyebrow">Mempelai</div>
       <h2 class="section-title">Kedua Mempelai</h2>
+      <div class="bindi-row"><span></span><span></span><span></span><span></span><span></span></div>
     </div>
     <div class="couple-grid reveal">
       <div class="couple-card">
         <div class="photo-frame"><div class="inner">
-          <!-- GANTI: <img src="assets/sisy.jpg" alt="Sisy Syafira"> -->
-          <svg viewBox="0 0 24 24" fill="none" stroke="#F1D28B" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
-        </div></div>
-        <h3>Sisy Syafira</h3>
-        <div class="role">Mempelai Wanita</div>
-        <!-- GANTI nama orang tua -->
-        <p>Putri dari<br>Bapak [Nama Ayah] &amp; Ibu [Nama Ibu]</p>
-      </div>
-      <div class="couple-mid">&</div>
-      <div class="couple-card">
-        <div class="photo-frame"><div class="inner">
-          <!-- GANTI: <img src="assets/rizky.jpg" alt="Rizky Prayogi"> -->
+          <!-- GANTI: <img src="rizky.jpg" alt="Rizky Prayogi"> -->
           <svg viewBox="0 0 24 24" fill="none" stroke="#F1D28B" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
         </div></div>
         <h3>Rizky Prayogi</h3>
@@ -738,15 +819,28 @@
         <!-- GANTI nama orang tua -->
         <p>Putra dari<br>Bapak [Nama Ayah] &amp; Ibu [Nama Ibu]</p>
       </div>
+      <div class="couple-mid">&</div>
+      <div class="couple-card">
+        <div class="photo-frame"><div class="inner">
+          <!-- GANTI: <img src="sisy.jpg" alt="Sisy Syafira"> -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="#F1D28B" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+        </div></div>
+        <h3>Sisy Syafira</h3>
+        <div class="role">Mempelai Wanita</div>
+        <!-- GANTI nama orang tua -->
+        <p>Putri dari<br>Bapak [Nama Ayah] &amp; Ibu [Nama Ibu]</p>
+      </div>
     </div>
   </section>
 
   <!-- COUNTDOWN -->
+  <div class="paisley-row"></div>
   <section class="countdown">
+    <div class="rangoli"></div>
     <div class="section-inner reveal">
       <div class="eyebrow">Menanti Hari Bahagia</div>
       <h2 class="section-title" style="color:var(--gold-light)">Hitung Mundur</h2>
-      <p class="section-sub">Menuju hari pernikahan Sisy &amp; Rizky</p>
+      <p class="section-sub">Menuju hari pernikahan Rizky &amp; Sisy</p>
       <div class="timer" id="timer">
         <div class="box"><div class="num" id="cd-days">00</div><div class="lbl">Hari</div></div>
         <div class="box"><div class="num" id="cd-hours">00</div><div class="lbl">Jam</div></div>
@@ -765,7 +859,7 @@
     </div>
     <div class="event-grid reveal">
       <div class="event-card">
-        <div class="icon">🪔</div>
+        <div class="icon"><span class="flame">🪔</span></div>
         <h4>Akad Nikah</h4>
         <!-- GANTI tanggal, jam, dan alamat -->
         <div class="when">Sabtu, 12 Desember 2026 • 08.00 – 10.00 WIB</div>
@@ -784,6 +878,7 @@
   </section>
 
   <!-- STORY -->
+  <div class="paisley-row"></div>
   <section class="story">
     <div class="section-inner reveal">
       <div class="eyebrow">Perjalanan Cinta</div>
@@ -804,13 +899,14 @@
       <div class="story-item">
         <div class="yr">Hari Ini</div>
         <h5>Janji Suci</h5>
-        <p>Dengan restu kedua keluarga, Sisy &amp; Rizky memantapkan langkah menuju satu ikatan.</p>
+        <p>Dengan restu kedua keluarga, Rizky &amp; Sisy memantapkan langkah menuju satu ikatan.</p>
       </div>
     </div>
   </section>
 
   <!-- GALLERY -->
   <section class="gallery">
+    <div class="rangoli"></div>
     <div class="section-inner reveal">
       <div class="eyebrow">Momen</div>
       <h2 class="section-title">Galeri</h2>
@@ -827,7 +923,9 @@
   </section>
 
   <!-- RSVP -->
+  <div class="paisley-row"></div>
   <section class="rsvp">
+    <div class="rangoli"></div>
     <div class="section-inner reveal">
       <div class="eyebrow">Konfirmasi Kehadiran</div>
       <h2 class="section-title" style="color:var(--gold-light)">RSVP</h2>
@@ -876,10 +974,11 @@
     </div>
   </section>
 
+  <div class="paisley-row"></div>
   <footer>
-    <div class="lotus">🪔</div>
+    <div class="lotus"><span class="flame">🪔</span></div>
     <div class="eyebrow">Terima Kasih</div>
-    <div class="names">Sisy &amp; Rizky</div>
+    <div class="names">Rizky &amp; Sisy</div>
     <p>Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu. <span class="heart-ico">♥</span></p>
   </footer>
 
@@ -904,9 +1003,10 @@
 
   function spawnHeart(){
     var h = document.createElement('div');
-    var isSpark = Math.random() < 0.25;
-    h.className = 'heart' + (isSpark ? ' spark-star' : '');
-    var size = isSpark ? (3 + Math.random()*4) : (8 + Math.random()*10);
+    var roll = Math.random();
+    var type = roll < 0.2 ? 'spark-star' : (roll < 0.4 ? 'petal' : '');
+    h.className = 'heart' + (type ? ' ' + type : '');
+    var size = type === 'spark-star' ? (3 + Math.random()*4) : (8 + Math.random()*10);
     var left = Math.random()*100;
     var duration = 6 + Math.random()*6;
     var swayDuration = 2 + Math.random()*2;
@@ -915,7 +1015,7 @@
     h.style.width = size + 'px';
     h.style.height = size + 'px';
     h.style.color = color;
-    if(!isSpark) h.style.background = color;
+    if(!type) h.style.background = color;
     h.style.opacity = (0.6 + Math.random()*0.4).toFixed(2);
     h.style.animationDuration = duration + 's, ' + swayDuration + 's';
     heartsContainer.appendChild(h);
