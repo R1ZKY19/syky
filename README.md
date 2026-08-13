@@ -9,12 +9,13 @@ Satu file HTML saja (`index.html`) — tidak perlu proses build apa pun.
 ```
 wedding-site/
 ├── index.html        ← seluruh halaman (HTML+CSS+JS jadi satu)
-└── assets/
-    ├── music.mp3      ← taruh file musik kamu di sini (nama file harus "music.mp3")
-    ├── sisy.jpg        ← foto mempelai wanita (opsional)
-    ├── rizky.jpg       ← foto mempelai pria (opsional)
-    └── foto1.jpg ...   ← foto galeri (opsional)
+├── music.mp3          ← file musik (harus sejajar dengan index.html, nama file harus "music.mp3")
+└── README.md
 ```
+
+Foto (opsional, jika ingin ditambahkan) bisa diupload langsung ke root repo juga,
+misalnya `sisy.jpg`, `rizky.jpg`, `foto1.jpg`, dst — tinggal sesuaikan nama file
+pada bagian `<img src="...">` di `index.html`.
 
 ## Apa saja yang perlu diganti
 
@@ -29,8 +30,10 @@ Buka `index.html`, cari komentar `<!-- GANTI ... -->` — semua ada di:
 
 ## Musik
 
-Kamu yang mengatur musiknya sendiri — cukup taruh file audio (mp3) di
-`assets/music.mp3`. Tombol bulat di pojok kanan bawah untuk play/pause.
+Kamu yang mengatur musiknya sendiri — cukup pastikan file audio (mp3) bernama
+persis `music.mp3` dan diletakkan **sejajar** dengan `index.html` di root repo
+(lihat struktur folder di atas — jangan taruh di dalam folder lain).
+Tombol bulat di pojok kanan bawah untuk play/pause.
 Musik otomatis mencoba diputar saat tombol "Buka Undangan" ditekan (browser
 tetap bisa memblokir autoplay tanpa interaksi, tapi karena ini dipicu oleh
 klik tombol, umumnya berhasil).
