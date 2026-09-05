@@ -105,6 +105,13 @@ section{position:relative;padding:140px 0;}
    BACKGROUND FX
 ============================================ */
 #bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.55;}
+.spotlight{
+  position:fixed;width:620px;height:620px;left:0;top:0;z-index:0;pointer-events:none;
+  transform:translate(-50%,-50%);opacity:0;
+  background:radial-gradient(circle, rgba(124,92,255,.14) 0%, rgba(0,229,199,.055) 28%, transparent 68%);
+  transition:opacity .45s var(--ease);
+}
+body:hover .spotlight{opacity:1;}
 .grid-overlay{
   position:fixed;inset:0;z-index:0;pointer-events:none;
   background-image:
@@ -171,6 +178,7 @@ section{position:relative;padding:140px 0;}
   box-shadow:var(--shadow);
   transition:top .4s var(--ease), background .4s;
 }
+#scroll-progress{position:fixed;top:0;left:0;width:0;height:2px;z-index:1002;background:linear-gradient(90deg,var(--accent),var(--accent-2));box-shadow:0 0 14px var(--accent);}
 .nav-logo{
   font-family:var(--font-mono);font-size:12px;font-weight:500;
   padding:0 14px;color:var(--accent);letter-spacing:.05em;
@@ -260,10 +268,14 @@ section{position:relative;padding:140px 0;}
   position:relative;height:460px;display:flex;align-items:center;justify-content:center;
   perspective:1200px;
 }
+.hero-stage::before{content:"";position:absolute;width:360px;height:360px;border-radius:50%;background:conic-gradient(from 180deg,transparent,var(--accent),transparent,var(--accent-2),transparent);filter:blur(22px);opacity:.22;animation:spin 12s linear infinite;}
+.hero-stage::after{content:"";position:absolute;width:330px;height:330px;border:1px dashed rgba(255,255,255,.18);border-radius:50%;animation:spin 18s linear infinite reverse;}
+@keyframes spin{to{transform:rotate(360deg);}}
 .hero-3d{
   position:relative;width:280px;height:280px;transform-style:preserve-3d;
   animation:floaty 6s ease-in-out infinite;
 }
+.hero-3d{z-index:1;will-change:transform;}
 @keyframes floaty{0%,100%{transform:translateY(0px) rotateX(0deg);}50%{transform:translateY(-18px) rotateX(4deg);}}
 .ring{
   position:absolute;inset:0;border-radius:50%;border:1px solid var(--accent);
@@ -278,6 +290,7 @@ section{position:relative;padding:140px 0;}
   box-shadow:0 0 80px var(--accent-soft), inset 0 0 40px rgba(255,255,255,.2);
   animation:pulse 4s ease-in-out infinite;
 }
+.core-sphere::after{content:"";position:absolute;inset:14%;border-radius:inherit;border:1px solid rgba(255,255,255,.42);box-shadow:inset 0 0 18px rgba(255,255,255,.2);}
 @keyframes pulse{0%,100%{filter:brightness(1);}50%{filter:brightness(1.15);}}
 .glass-panel{
   position:absolute;width:90px;height:120px;border-radius:14px;
@@ -382,6 +395,11 @@ section{position:relative;padding:140px 0;}
   font-family:var(--font-mono);font-size:11px;color:var(--text-muted);letter-spacing:.15em;text-transform:uppercase;
   position:relative;overflow:hidden;
 }
+.project-card:nth-child(2) .project-thumb::before{background:radial-gradient(circle at 72% 28%,rgba(0,229,199,.28),transparent 52%),linear-gradient(135deg,transparent 45%,rgba(124,92,255,.2));}
+.project-card:nth-child(3) .project-thumb::before{background:repeating-linear-gradient(90deg,transparent 0 18px,rgba(0,229,199,.09) 19px 20px),radial-gradient(circle at 25% 70%,var(--accent-soft),transparent 55%);}
+.project-card:nth-child(4) .project-thumb::before{background:linear-gradient(135deg,rgba(0,229,199,.18),transparent 40%),radial-gradient(circle at 75% 75%,var(--accent-soft),transparent 50%);}
+.project-thumb::after{content:"✦";position:absolute;right:20px;bottom:14px;font-size:34px;color:var(--accent-2);opacity:.55;animation:twinkle 2.8s ease-in-out infinite;}
+@keyframes twinkle{50%{transform:scale(1.35) rotate(24deg);opacity:1;}}
 .project-thumb::before{
   content:"";position:absolute;inset:0;
   background:radial-gradient(circle at 30% 20%, var(--accent-soft), transparent 60%);
@@ -467,6 +485,10 @@ footer{padding:70px 0 40px;text-align:center;border-top:1px solid var(--border);
 .skip-link{position:absolute;left:-999px;top:0;background:var(--accent);color:#fff;padding:10px 16px;z-index:10001;border-radius:0 0 8px 0;}
 .skip-link:focus{left:0;}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
+@media (prefers-reduced-motion: no-preference){
+  .glass{transition:transform .35s var(--ease),border-color .35s var(--ease),background .35s var(--ease);}
+  .glass:hover{background:var(--surface-strong);}
+}
 </style>
 </head>
 <body>
@@ -482,6 +504,7 @@ footer{padding:70px 0 40px;text-align:center;border-top:1px solid var(--border);
 
 <!-- BACKGROUND -->
 <canvas id="bg-canvas"></canvas>
+<div class="spotlight" id="spotlight"></div>
 <div class="grid-overlay"></div>
 <div class="orb orb-1"></div>
 <div class="orb orb-2"></div>
@@ -489,6 +512,7 @@ footer{padding:70px 0 40px;text-align:center;border-top:1px solid var(--border);
 <!-- CURSOR -->
 <div class="cursor-dot" id="cursorDot"></div>
 <div class="cursor-ring" id="cursorRing"></div>
+<div id="scroll-progress" aria-hidden="true"></div>
 
 <!-- NAVBAR -->
 <nav id="navbar">
@@ -863,10 +887,12 @@ window.addEventListener('load', () => {
 /* ============ CUSTOM CURSOR ============ */
 const dot = document.getElementById('cursorDot');
 const ring = document.getElementById('cursorRing');
+const spotlight = document.getElementById('spotlight');
 let mx = window.innerWidth/2, my = window.innerHeight/2, rx = mx, ry = my;
 window.addEventListener('mousemove', e => {
   mx = e.clientX; my = e.clientY;
   dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+  spotlight.style.left = mx + 'px'; spotlight.style.top = my + 'px';
 });
 function animCursor(){
   rx += (mx - rx) * 0.18; ry += (my - ry) * 0.18;
@@ -883,14 +909,36 @@ document.querySelectorAll('a, button, .glass, input, textarea').forEach(el => {
 const heroStage = document.getElementById('heroStage');
 const hero3d = document.getElementById('hero3d');
 if(heroStage){
+  let heroX = 0, heroY = 0, targetX = 0, targetY = 0;
+  const animateHero = () => {
+    heroX += (targetX - heroX) * .08;
+    heroY += (targetY - heroY) * .08;
+    hero3d.style.transform = `translateY(-4px) rotateY(${heroX}deg) rotateX(${heroY}deg)`;
+    requestAnimationFrame(animateHero);
+  };
+  animateHero();
   heroStage.addEventListener('mousemove', e => {
     const rect = heroStage.getBoundingClientRect();
     const px = (e.clientX - rect.left) / rect.width - 0.5;
     const py = (e.clientY - rect.top) / rect.height - 0.5;
-    hero3d.style.transform = `rotateY(${px*30}deg) rotateX(${-py*30}deg)`;
+    targetX = px * 28;
+    targetY = -py * 22;
   });
   heroStage.addEventListener('mouseleave', () => {
-    hero3d.style.transform = 'rotateY(0deg) rotateX(0deg)';
+    targetX = 0; targetY = 0;
+  });
+}
+
+/* ============ MAGNETIC BUTTONS ============ */
+if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches && window.innerWidth > 900){
+  document.querySelectorAll('.btn-primary').forEach(button => {
+    button.addEventListener('mousemove', e => {
+      const rect = button.getBoundingClientRect();
+      const x = (e.clientX - rect.left - rect.width / 2) * .16;
+      const y = (e.clientY - rect.top - rect.height / 2) * .16;
+      button.style.transform = `translate(${x}px, ${y}px)`;
+    });
+    button.addEventListener('mouseleave', () => { button.style.transform = ''; });
   });
 }
 
@@ -906,7 +954,9 @@ window.addEventListener('scroll', () => {
   navLinks.forEach(link => {
     link.classList.toggle('active', link.getAttribute('href') === '#' + current);
   });
-});
+  const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('scroll-progress').style.width = (maxScroll ? window.scrollY / maxScroll * 100 : 0) + '%';
+}, { passive: true });
 
 /* ============ MOBILE MENU ============ */
 const hamburgerBtn = document.getElementById('hamburgerBtn');
@@ -1026,6 +1076,22 @@ function drawParticles(){
     ctx.globalAlpha = p.o;
     ctx.fill();
   });
+  ctx.lineWidth = .55;
+  for(let i = 0; i < particles.length; i++){
+    for(let j = i + 1; j < particles.length; j++){
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const distance = Math.hypot(dx, dy);
+      if(distance < 105){
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(particles[j].x, particles[j].y);
+        ctx.strokeStyle = accent;
+        ctx.globalAlpha = (1 - distance / 105) * .16;
+        ctx.stroke();
+      }
+    }
+  }
   ctx.globalAlpha = 1;
   if(!reducedMotion) requestAnimationFrame(drawParticles);
 }
